@@ -1,7 +1,7 @@
 package com.mksherbini.backend.services;
 
 import com.mksherbini.backend.utils.CountryPhoneClassifier;
-import com.mksherbini.backend.utils.PhoneCodeExtractor;
+import com.mksherbini.backend.utils.PhoneCountryCodeExtractor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class PhoneNumberValidationService {
     private final CountryPhoneClassifier countryPhoneClassifier;
 
     public boolean isValid(String phone) {
-        final var countryCode = PhoneCodeExtractor.getCountryCode(phone);
+        final var countryCode = PhoneCountryCodeExtractor.getCountryCode(phone);
         final var phoneRegex = countryPhoneClassifier.getPhoneRegexByCode(countryCode);
 
         final Pattern pattern = Pattern.compile(phoneRegex);

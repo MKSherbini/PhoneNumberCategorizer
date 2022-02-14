@@ -5,10 +5,10 @@ import com.mksherbini.backend.exceptions.PhoneNumberParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PhoneCodeExtractor {
+public class PhoneCountryCodeExtractor {
     static final String COUNTRY_CODE_RGX = "^\\((\\d{3})\\)";
 
-    private PhoneCodeExtractor() {
+    private PhoneCountryCodeExtractor() {
     }
 
     public static int getCountryCode(String phone) {
