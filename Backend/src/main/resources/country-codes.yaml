@@ -1,0 +1,18 @@
+country:
+  phones:
+    countryPhones:
+      - name: Cameron
+        code: 237
+        phoneRegex: "\\(237\\)\\ ?[2368]\\d{7,8}$"
+      - name: Ethiopia
+        code: 251
+        phoneRegex: "\\(251\\)\\ ?[1-59]\\d{8}$"
+      - name: Morocco
+        code: 212
+        phoneRegex: "\\(212\\)\\ ?[5-9]\\d{8}$"
+      - name: Mozambique
+        code: 258
+        phoneRegex: "\\(258\\)\\ ?[28]\\d{7,8}$"
+      - name: Uganda
+        code: 256
+        phoneRegex: "\\(256\\)\\ ?\\d{9}$"
