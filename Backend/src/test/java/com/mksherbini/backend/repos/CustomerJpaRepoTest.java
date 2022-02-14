@@ -2,6 +2,7 @@ package com.mksherbini.backend.repos;
 
 import com.mksherbini.backend.models.Customer;
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -15,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@Log
+@Slf4j
 class CustomerJpaRepoTest {
 
     @Autowired

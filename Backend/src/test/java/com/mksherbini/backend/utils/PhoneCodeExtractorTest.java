@@ -1,24 +1,23 @@
 package com.mksherbini.backend.utils;
 
 import com.mksherbini.backend.exceptions.PhoneNumberParseException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PhoneNumberClassifierTest {
+class PhoneCodeExtractorTest {
 
     @Test
     void getCountryCode() {
         final String phone = "(237) 697151594";
-        assertEquals(237, PhoneNumberClassifier.getCountryCode(phone));
+        assertEquals(237, PhoneCodeExtractor.getCountryCode(phone));
     }
 
     @Test
     void shouldFailWhenLessThanThreeNumbers() {
         final String phone = "(27) 697151594";
         assertThrows(
-                PhoneNumberParseException.class, () -> PhoneNumberClassifier.getCountryCode(phone)
+                PhoneNumberParseException.class, () -> PhoneCodeExtractor.getCountryCode(phone)
         );
     }
 
@@ -26,7 +25,7 @@ class PhoneNumberClassifierTest {
     void shouldFailWhenMissingBrackets() {
         final String phone = "(237 697151594";
         assertThrows(
-                PhoneNumberParseException.class, () -> PhoneNumberClassifier.getCountryCode(phone)
+                PhoneNumberParseException.class, () -> PhoneCodeExtractor.getCountryCode(phone)
         );
     }
 }
