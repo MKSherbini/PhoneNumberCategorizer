@@ -21,13 +21,22 @@ public class CustomerFilterService {
     private final CountryPhoneClassifier countryPhoneClassifier;
     private final CustomerAdapter customerAdapter;
 
-    public List<CustomerDto> getCustomersByFilter(String country, Boolean phoneState) {
-        Stream<Customer> customerStream = customerJpaRepo.findAll().stream();
+    public List<CustomerDto> getCustomersByFilter(String country, Boolean phoneState, int pageIdx, int pageSize) {
+        var customerStream = customerJpaRepo.findAll().stream();
         customerStream = filterStreamByCountry(customerStream, country);
         customerStream = filterStreamByPhoneState(customerStream, phoneState);
+        customerStream = paginateStream(customerStream, pageIdx, pageSize);
         return customerAdapter.adaptOrmToDto(
                 customerStream.collect(Collectors.toList())
         );
+    }
+
+    public List<CustomerDto> getCustomersByFilter(String country, Boolean phoneState) {
+        return this.getCustomersByFilter(country, phoneState, 0, 10);
+    }
+
+    private Stream<Customer> paginateStream(Stream<Customer> stream, int pageIdx, int pageSize) {
+        return stream.skip((long) pageSize * pageIdx).limit(pageSize);
     }
 
     private Stream<Customer> filterStreamByCountry(Stream<Customer> stream, String country) {

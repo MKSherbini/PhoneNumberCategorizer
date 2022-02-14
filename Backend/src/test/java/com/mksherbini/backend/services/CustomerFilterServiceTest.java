@@ -3,10 +3,8 @@ package com.mksherbini.backend.services;
 import com.mksherbini.backend.models.dto.CustomerDto;
 import com.mksherbini.backend.models.orm.Customer;
 import com.mksherbini.backend.repos.CustomerJpaRepo;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -14,7 +12,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -25,6 +22,7 @@ class CustomerFilterServiceTest {
 
     @Autowired
     CustomerFilterService customerFilterService;
+
 
     @BeforeEach
     void setUp() {
@@ -91,6 +89,21 @@ class CustomerFilterServiceTest {
         assertThat(filtered)
                 .isNotNull()
                 .hasSize(4)
+                .isEqualTo(customers);
+    }
+
+    @Test
+    void filterCustomersByNoCountryAndNoPhoneCheckByPage() {
+        final var customers = List.of(
+                new CustomerDto("Not Knuckles", "(258) 847651504", "Mozambique", 258, true),
+                new CustomerDto("Not Knuckles 2", "(212) 691933626", "Morocco", 212, true)
+        );
+
+        final var filtered = customerFilterService.getCustomersByFilter(null, null, 1, 2);
+
+        assertThat(filtered)
+                .isNotNull()
+                .hasSize(2)
                 .isEqualTo(customers);
     }
 
