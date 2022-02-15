@@ -11,9 +11,8 @@ export class AppComponent implements OnInit {
   phoneStates: string[] = ["Show All", "Valid only", "Invalid only"];
 
   customers: CustomerDto[] = [];
-  page: Page = { number: 0, size: 10 };
-  lastElement: number = 1;
-  currentPage: number = 0;
+  page: Page = { number: 0, size: 10, totalElements: 10, totalPages: 1 };
+  pageButtonsVisible: number = 5;
   phoneStateFilter: string = this.phoneStates[0];
   countryFilter: string = "";
 
@@ -33,13 +32,24 @@ export class AppComponent implements OnInit {
     ).subscribe(ret => {
       this.customers = ret.data as CustomerDto[];
       this.page = ret.page as Page;
-      this.currentPage = ret.page?.number as number;
-      this.lastElement = ret.page?.totalPages as number - 1;
     })
   }
 
   setPhoneState(phoneState: string): void {
     this.phoneStateFilter = phoneState;
+  }
+
+  getVisiblePages(): number[] {
+    let pages: number[] = [];
+    let offset: number = Math.floor(this.pageButtonsVisible / 2);
+    let start: number = Math.max(0, this.page.number - offset);
+    let end: number = Math.min(this.page.totalPages - 1, this.page.number + offset);
+
+    for (let index = start; index <= end; index++) {
+      pages.push(index);
+    }
+
+    return pages;
   }
 
   fetchPage(pageNumber: number): void {
