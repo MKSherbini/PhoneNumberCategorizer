@@ -14,10 +14,11 @@ import org.springframework.stereotype.Component;
 public class CustomerAdapter implements GenericAdapter<Customer, CustomerDto> {
     private final PhoneNumberValidationService phoneNumberValidationService;
     private final CountryPhoneClassifier countryPhoneClassifier;
+    private final ModelMapper modelMapper;
 
     @Override
     public CustomerDto adaptOrmToDto(Customer customer) {
-        final CustomerDto customerDto = new ModelMapper().map(customer, CustomerDto.class);
+        final CustomerDto customerDto = modelMapper.map(customer, CustomerDto.class);
         customerDto.setPhoneState(phoneNumberValidationService.isValid(customer.getPhone()));
         customerDto.setCountryCode(PhoneCountryCodeExtractor.getCountryCode(customer.getPhone()));
         customerDto.setCountryName(countryPhoneClassifier.getCountryNameByCode(customerDto.getCountryCode()));
