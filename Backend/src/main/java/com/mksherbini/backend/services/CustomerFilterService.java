@@ -1,6 +1,7 @@
 package com.mksherbini.backend.services;
 
 import com.mksherbini.backend.adapters.CustomerAdapter;
+import com.mksherbini.backend.models.Page;
 import com.mksherbini.backend.models.dto.CustomerDto;
 import com.mksherbini.backend.models.orm.Customer;
 import com.mksherbini.backend.repos.CustomerJpaRepo;
@@ -21,22 +22,26 @@ public class CustomerFilterService {
     private final CountryPhoneClassifier countryPhoneClassifier;
     private final CustomerAdapter customerAdapter;
 
-    public List<CustomerDto> getCustomersByFilter(String country, Boolean phoneState, int pageIdx, int pageSize) {
+    public List<CustomerDto> getCustomersByFilter(String country, Boolean phoneState) {
         var customerStream = customerJpaRepo.findAll().stream();
         customerStream = filterStreamByCountry(customerStream, country);
         customerStream = filterStreamByPhoneState(customerStream, phoneState);
-        customerStream = paginateStream(customerStream, pageIdx, pageSize);
+
         return customerAdapter.adaptOrmToDto(
                 customerStream.collect(Collectors.toList())
         );
     }
 
-    public List<CustomerDto> getCustomersByFilter(String country, Boolean phoneState) {
-        return this.getCustomersByFilter(country, phoneState, 0, 10);
+    public List<CustomerDto> paginateCustomers(List<CustomerDto> customers, int pageNumber, int pageSize) {
+        var customerStream = customers.stream();
+
+        customerStream = paginateStream(customerStream, pageNumber, pageSize);
+
+        return customerStream.collect(Collectors.toList());
     }
 
-    private Stream<Customer> paginateStream(Stream<Customer> stream, int pageIdx, int pageSize) {
-        return stream.skip((long) pageSize * pageIdx).limit(pageSize);
+    private <T> Stream<T> paginateStream(Stream<T> stream, int pageNumber, int pageSize) {
+        return stream.skip((long) pageSize * pageNumber).limit(pageSize);
     }
 
     private Stream<Customer> filterStreamByCountry(Stream<Customer> stream, String country) {

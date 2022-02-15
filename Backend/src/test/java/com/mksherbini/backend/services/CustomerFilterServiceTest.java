@@ -95,16 +95,39 @@ class CustomerFilterServiceTest {
     @Test
     void filterCustomersByNoCountryAndNoPhoneCheckByPage() {
         final var customers = List.of(
+                new CustomerDto("Knuckles", "(256) 714660221", "Uganda", 256, true),
+                new CustomerDto("Fake Knuckles", "(256) 3142345678", "Uganda", 256, false),
                 new CustomerDto("Not Knuckles", "(258) 847651504", "Mozambique", 258, true),
                 new CustomerDto("Not Knuckles 2", "(212) 691933626", "Morocco", 212, true)
         );
 
-        final var filtered = customerFilterService.getCustomersByFilter(null, null, 1, 2);
+        final var filtered = customerFilterService.getCustomersByFilter(null, null);
+
+        assertThat(filtered)
+                .isNotNull()
+                .hasSize(4)
+                .isEqualTo(customers);
+    }
+
+    @Test
+    void paginateCustomersByNoCountryAndNoPhoneCheckByPage() {
+        final var customers = List.of(
+                new CustomerDto("Knuckles", "(256) 714660221", "Uganda", 256, true),
+                new CustomerDto("Fake Knuckles", "(256) 3142345678", "Uganda", 256, false),
+                new CustomerDto("Not Knuckles", "(258) 847651504", "Mozambique", 258, true),
+                new CustomerDto("Not Knuckles 2", "(212) 691933626", "Morocco", 212, true)
+        );
+       final var paginateCustomers = List.of(
+                new CustomerDto("Not Knuckles", "(258) 847651504", "Mozambique", 258, true),
+                new CustomerDto("Not Knuckles 2", "(212) 691933626", "Morocco", 212, true)
+        );
+
+        final var filtered = customerFilterService.paginateCustomers(customers, 1, 2);
 
         assertThat(filtered)
                 .isNotNull()
                 .hasSize(2)
-                .isEqualTo(customers);
+                .isEqualTo(paginateCustomers);
     }
 
     @Test
