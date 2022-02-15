@@ -9,4 +9,6 @@ git_push.sh
 index.ts
 model/customerDto.ts
 model/models.ts
+model/page.ts
+model/requestResponseListCustomerDto.ts
 variables.ts

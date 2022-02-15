@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { CustomerDto } from '../model/customerDto';
+import { RequestResponseListCustomerDto } from '../model/requestResponseListCustomerDto';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -95,10 +95,10 @@ export class CustomerAppControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findAllCustomers(country?: string, state?: boolean, page?: number, size?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<Array<CustomerDto>>;
-    public findAllCustomers(country?: string, state?: boolean, page?: number, size?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<Array<CustomerDto>>>;
-    public findAllCustomers(country?: string, state?: boolean, page?: number, size?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<Array<CustomerDto>>>;
-    public findAllCustomers(country?: string, state?: boolean, page?: number, size?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public findAllCustomers(country?: string, state?: boolean, page?: number, size?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<RequestResponseListCustomerDto>;
+    public findAllCustomers(country?: string, state?: boolean, page?: number, size?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<RequestResponseListCustomerDto>>;
+    public findAllCustomers(country?: string, state?: boolean, page?: number, size?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<RequestResponseListCustomerDto>>;
+    public findAllCustomers(country?: string, state?: boolean, page?: number, size?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (country !== undefined && country !== null) {
@@ -124,7 +124,7 @@ export class CustomerAppControllerService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                '*/*'
+                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -149,7 +149,7 @@ export class CustomerAppControllerService {
             }
         }
 
-        return this.httpClient.get<Array<CustomerDto>>(`${this.configuration.basePath}/`,
+        return this.httpClient.get<RequestResponseListCustomerDto>(`${this.configuration.basePath}/`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
