@@ -4,12 +4,16 @@
     <input [(ngModel)]="countryFilter" value="{{countryFilter}}" type="text" class="form-control"
       placeholder="Enter country to filter by">
   </div>
-  <div ngbDropdown class="col-3">
+  <div ngbDropdown class="col-2">
     <label class="form-label">Phone State</label><br />
     <button class="btn btn-outline-primary" ngbDropdownToggle>{{phoneStateFilter}}</button>
     <div ngbDropdownMenu>
       <button ngbDropdownItem *ngFor="let item of phoneStates" (click)="setPhoneState(item)">{{item}}</button>
     </div>
+  </div>
+  <div class="col-1">
+    <label class="form-label">Page size</label>
+    <input [(ngModel)]="page.size" value="{{page.size}}" type="text" class="form-control" placeholder="Size">
   </div>
   <button type="button" class="btn btn-primary col-3 mt-2" (click)="submitFetchRequest()">Apply Filter</button>
 </div>
@@ -35,20 +39,20 @@
 
 <nav clas="text-center">
   <ul class="pagination justify-content-center">
-    <li class="page-item" [class.disabled]="0==page.number">
+    <li class="page-item" [class.disabled]="0==page.number" (click)="fetchPage(0)">
       <span class="page-link">First</span>
     </li>
-    <li class="page-item" [class.disabled]="0==page.number">
+    <li class="page-item" [class.disabled]="0==page.number" (click)="fetchPage(currentPage-1)">
       <span class="page-link">Previous</span>
     </li>
     <li class="page-item" aria-current="page" [class.active]="i==page.number"
       *ngFor="let _ of [].constructor(page.totalPages); let i = index" (click)="fetchPage(i)">
       <span class="page-link">{{i+1}}</span>
     </li>
-    <li class="page-item" [class.disabled]="lastElement==page.number">
+    <li class="page-item" [class.disabled]="lastElement==page.number" (click)="fetchPage(currentPage+1)">
       <a class="page-link" href="#">Next</a>
     </li>
-    <li class="page-item" [class.disabled]="lastElement==page.number">
+    <li class="page-item" [class.disabled]="lastElement==page.number" (click)="fetchPage(lastElement)">
       <a class="page-link" href="#">Last</a>
     </li>
   </ul>

@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   customers: CustomerDto[] = [];
   page: Page = { number: 0, size: 10 };
   lastElement: number = 1;
+  currentPage: number = 0;
   phoneStateFilter: string = this.phoneStates[0];
   countryFilter: string = "";
 
@@ -28,10 +29,11 @@ export class AppComponent implements OnInit {
       this.countryFilter == "" ? undefined : this.countryFilter,
       this.getPhoneStateAsBoolean(),
       pageNumber,
-      undefined
+      this.page.size
     ).subscribe(ret => {
       this.customers = ret.data as CustomerDto[];
       this.page = ret.page as Page;
+      this.currentPage = ret.page?.number as number;
       this.lastElement = ret.page?.totalPages as number - 1;
     })
   }
