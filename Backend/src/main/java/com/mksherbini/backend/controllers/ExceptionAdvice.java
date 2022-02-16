@@ -1,6 +1,6 @@
 package com.mksherbini.backend.controllers;
 
-import com.mksherbini.backend.models.ErrorResponse;
+import com.mksherbini.backend.models.web.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

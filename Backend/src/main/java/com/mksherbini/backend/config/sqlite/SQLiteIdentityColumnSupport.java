@@ -1,4 +1,4 @@
-package com.mksherbini.backend.config;
+package com.mksherbini.backend.config.sqlite;
 
 import org.hibernate.MappingException;
 import org.hibernate.dialect.identity.IdentityColumnSupportImpl;

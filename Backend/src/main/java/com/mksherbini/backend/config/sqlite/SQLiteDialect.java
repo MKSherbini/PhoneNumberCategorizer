@@ -1,4 +1,4 @@
-package com.mksherbini.backend.config;
+package com.mksherbini.backend.config.sqlite;
 
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.identity.IdentityColumnSupport;

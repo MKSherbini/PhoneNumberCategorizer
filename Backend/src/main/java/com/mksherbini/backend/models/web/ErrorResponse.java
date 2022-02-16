@@ -1,4 +1,4 @@
-package com.mksherbini.backend.models;
+package com.mksherbini.backend.models.web;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package com.mksherbini.backend.controllers;
 
 import com.mksherbini.backend.models.Page;
-import com.mksherbini.backend.models.RequestResponse;
+import com.mksherbini.backend.models.web.RequestResponse;
 import com.mksherbini.backend.models.dto.CustomerDto;
 import com.mksherbini.backend.models.orm.Customer;
 import com.mksherbini.backend.services.CustomerFilterService;
