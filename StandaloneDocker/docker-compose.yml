@@ -3,15 +3,11 @@ services:
   phnevalidation-backend:
     image: mksherbini/phnevalidation-backend
     container_name: phnevalidation-backend
-    build:
-      context: ./backend
     ports:
       - "8888:8888"
   phnevalidation-frontend:
     image: mksherbini/phnevalidation-frontend
     container_name: phnevalidation-frontend
-    build:
-      context: ./frontend
     ports:
       - "4200:4200"
     depends_on:

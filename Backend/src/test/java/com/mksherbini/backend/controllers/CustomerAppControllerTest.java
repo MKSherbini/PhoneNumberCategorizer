@@ -109,7 +109,7 @@ class CustomerAppControllerTest {
         when(customerFilterService.paginateCustomers(customers, 0, 10))
                 .thenReturn(customers);
 
-        String url = "http://localhost:" + port + servletContext.getContextPath();
+        String url = "http://localhost:" + port + servletContext.getContextPath() + "/customers";
         ResponseEntity<RequestResponse<List<Customer>>> response = restTemplate.exchange(
                 url, HttpMethod.GET, null,
                 new ParameterizedTypeReference<>() {
