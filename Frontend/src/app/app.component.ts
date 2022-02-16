@@ -53,7 +53,8 @@ export class AppComponent implements OnInit {
   }
 
   fetchPage(pageNumber: number): void {
-    this.submitFetchRequest(pageNumber);
+    if (pageNumber >= 0 && pageNumber < this.page.totalPages)
+      this.submitFetchRequest(pageNumber);
   }
 
   getPhoneStateAsBoolean(): boolean | undefined {

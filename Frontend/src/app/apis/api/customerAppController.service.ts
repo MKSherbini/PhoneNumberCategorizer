@@ -149,7 +149,7 @@ export class CustomerAppControllerService {
             }
         }
 
-        return this.httpClient.get<RequestResponseListCustomerDto>(`${this.configuration.basePath}/`,
+        return this.httpClient.get<RequestResponseListCustomerDto>(`${this.configuration.basePath}/customers`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
