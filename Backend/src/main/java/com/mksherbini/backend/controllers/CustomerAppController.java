@@ -4,7 +4,6 @@ import com.mksherbini.backend.models.Page;
 import com.mksherbini.backend.models.dto.CustomerDto;
 import com.mksherbini.backend.services.CustomerFilterService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.hateoas.Link;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

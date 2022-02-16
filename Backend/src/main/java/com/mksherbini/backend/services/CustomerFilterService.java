@@ -1,7 +1,6 @@
 package com.mksherbini.backend.services;
 
 import com.mksherbini.backend.adapters.CustomerAdapter;
-import com.mksherbini.backend.models.Page;
 import com.mksherbini.backend.models.dto.CustomerDto;
 import com.mksherbini.backend.models.orm.Customer;
 import com.mksherbini.backend.repos.CustomerJpaRepo;
